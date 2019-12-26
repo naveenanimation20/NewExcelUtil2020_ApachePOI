@@ -6,17 +6,30 @@ public class ExcelUtilTest {
 
 	public static void main(String[] args) {
 
+		Xls_Reader reader = new Xls_Reader("./src/main/java/com/excel/lib/util/SampleExcel.xlsx");
+		String sheetName = "login";
 		
-		Xls_Reader reader = new Xls_Reader("/Users/NaveenKhunteta/Documents/workspace/ExcelUtil/"
-				+ "src/main/java/com/excel/lib/util/SampleExcel.xlsx");
-		String data = reader.getCellData("login", "username", 3);
-		System.out.println(reader.getCellData("login", 1, 3));
+		System.out.println(reader.getCellData(sheetName, "username", 3));
+		String data = reader.getCellData(sheetName, 0, 2);
 		System.out.println(data);
 		
-		//reader.setCellData("login", "status", 2, "pass");
+		int rowCount = reader.getRowCount(sheetName);
+		System.out.println("total rows: "+ rowCount);
 		
-		//reader.addSheet("Naveen2");
-	//	reader.removeColumn("login", 2);
+		//reader.addColumn(sheetName, "status");
+		
+		if(! reader.isSheetExist("Regsitration")){
+			reader.addSheet("Regsitration");
+		}
+		reader.setCellData(sheetName, "status", 2, "PASS");
+		
+		System.out.println(reader.getColumnCount(sheetName));
+		
+		//reader.removeColumn("Regsitration", 0);
+		
+		System.out.println(reader.getCellData("Regsitration", "phonenumber", 2));
+		System.out.println(reader.getCellData("Regsitration", "age", 2));
+
 		
 	}
 

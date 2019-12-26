@@ -94,7 +94,7 @@ public class Xls_Reader {
 			if (cell == null)
 				return "";
 
-			System.out.println(cell.getCellType().name());
+			//System.out.println(cell.getCellType().name());
 			//
 			if (cell.getCellType().name().equals("STRING"))
 				return cell.getStringCellValue();
