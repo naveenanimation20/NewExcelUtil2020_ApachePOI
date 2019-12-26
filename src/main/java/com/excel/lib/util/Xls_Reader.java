@@ -1,15 +1,14 @@
 package com.excel.lib.util;
 
-//Apache POI Lib
 /**
  * @author NaveenKhunteta
  * Created Date: Dec 25th, 2019
  * mail me at naveenanimation20@gmail.com in case of any PR or query
+ * Licensed under NaveenAutomation Labs
  */
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Calendar;
 
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -56,6 +55,15 @@ public class Xls_Reader {
 
 	}
 
+	/**
+	 * Code has been updated as per new POI version - 4.x.x
+	 * 
+	 * @author NaveenKhunteta
+	 * @param sheetName
+	 * @param colNum
+	 * @param rowNum
+	 * @return
+	 */
 	// returns the data from a cell
 	public String getCellData(String sheetName, String colName, int rowNum) {
 		try {
@@ -85,12 +93,17 @@ public class Xls_Reader {
 
 			if (cell == null)
 				return "";
-			// System.out.println(cell.getCellType());
-			if (cell.getCellType().STRING != null)
 
-				// if(cell.getCellType()==Xls_Reader.CELL_TYPE_STRING)
+			System.out.println(cell.getCellType().name());
+			//
+			if (cell.getCellType().name().equals("STRING"))
 				return cell.getStringCellValue();
-			else if ((cell.getCellType().NUMERIC != null) || (cell.getCellType().FORMULA != null)) {
+
+			// if (cell.getCellType().STRING != null)
+
+			// if(cell.getCellType()==Xls_Reader.CELL_TYPE_STRING)
+			// return cell.getStringCellValue();
+			else if ((cell.getCellType().name().equals("NUMERIC")) || (cell.getCellType().name().equals("FORMULA"))) {
 
 				String cellText = String.valueOf(cell.getNumericCellValue());
 				if (HSSFDateUtil.isCellDateFormatted(cell)) {
@@ -119,6 +132,15 @@ public class Xls_Reader {
 		}
 	}
 
+	/**
+	 * Code has been updated as per new POI version - 4.x.x
+	 * 
+	 * @author NaveenKhunteta
+	 * @param sheetName
+	 * @param colNum
+	 * @param rowNum
+	 * @return
+	 */
 	// returns the data from a cell
 	public String getCellData(String sheetName, int colNum, int rowNum) {
 		try {
@@ -138,9 +160,14 @@ public class Xls_Reader {
 			if (cell == null)
 				return "";
 
-			if (cell.getCellType().STRING != null)
+			//
+			if (cell.getCellType().name().equals("STRING"))
 				return cell.getStringCellValue();
-			else if (cell.getCellType().NUMERIC != null || cell.getCellType().FORMULA != null) {
+
+			//
+			// if (cell.getCellType().STRING != null)
+			// return cell.getStringCellValue();
+			else if ((cell.getCellType().name().equals("NUMERIC")) || (cell.getCellType().name().equals("FORMULA"))) {
 
 				String cellText = String.valueOf(cell.getNumericCellValue());
 				if (HSSFDateUtil.isCellDateFormatted(cell)) {
@@ -248,7 +275,7 @@ public class Xls_Reader {
 	//
 	// if(colNum==-1)
 	// return false;
-	// sheet.autoSizeColumn(colNum); 
+	// sheet.autoSizeColumn(colNum);
 	// row = sheet.getRow(rowNum-1);
 	// if (row == null)
 	// row = sheet.createRow(rowNum-1);
@@ -465,17 +492,4 @@ public class Xls_Reader {
 
 	}
 
-	// to run this on stand alone
-	public static void main(String arg[]) throws IOException {
-
-		// System.out.println(filename);
-		Xls_Reader datatable = null;
-
-		/*
-		 * datatable = new Xls_Reader(System.getProperty("user.dir")+
-		 * "\\src\\com\\qtpselenium\\xls\\Controller.xlsx"); for(int col=0 ;col<
-		 * datatable.getColumnCount("TC5"); col++){
-		 * System.out.println(datatable.getCellData("TC5", col, 1)); }
-		 */
-	}
 }
